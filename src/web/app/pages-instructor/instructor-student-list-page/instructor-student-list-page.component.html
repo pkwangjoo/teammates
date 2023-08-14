@@ -74,8 +74,9 @@
                         <div ngbDropdownMenu>
                           <a
                             class="btn btn-primary btn-sm dropdown-item clickable"
+                            *ngFor="let section of courseTab.sectionList"
                           >
-                          section
+                          {{section}}
                           </a>
                         </div>
                       </div>

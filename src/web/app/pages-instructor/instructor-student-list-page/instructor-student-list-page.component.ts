@@ -26,6 +26,7 @@ interface StudentIndexedData {
 
 export interface CourseTab {
   course: Course;
+  sectionList: string[]
   studentList: StudentListRowModel[];
   studentSortBy: SortBy;
   studentSortOrder: SortOrder;
@@ -83,6 +84,7 @@ export class InstructorStudentListPageComponent implements OnInit {
               const courseTab: CourseTab = {
                 course,
                 studentList: [],
+                sectionList: [],
                 studentSortBy: SortBy.NONE,
                 studentSortOrder: SortOrder.ASC,
                 hasTabExpanded: false,
@@ -159,6 +161,7 @@ export class InstructorStudentListPageComponent implements OnInit {
 
                       courseTab.studentList.push(...studentModels);
                       courseTab.studentList.sort(this.sortStudentBy(SortBy.NONE, SortOrder.ASC));
+                      courseTab.sectionList.push(sectionName);
                     });
 
                     courseTab.stats = this.courseService.calculateCourseStatistics(students.students);
