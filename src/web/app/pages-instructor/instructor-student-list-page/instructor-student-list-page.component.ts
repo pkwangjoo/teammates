@@ -27,6 +27,7 @@ interface StudentIndexedData {
 export interface CourseTab {
   course: Course;
   sectionList: string[]
+  selectedSectionFilter: string;
   studentList: StudentListRowModel[];
   studentSortBy: SortBy;
   studentSortOrder: SortOrder;
@@ -85,6 +86,7 @@ export class InstructorStudentListPageComponent implements OnInit {
                 course,
                 studentList: [],
                 sectionList: [],
+                selectedSectionFilter: '',
                 studentSortBy: SortBy.NONE,
                 studentSortOrder: SortOrder.ASC,
                 hasTabExpanded: false,
@@ -320,5 +322,9 @@ export class InstructorStudentListPageComponent implements OnInit {
 
       return this.tableComparatorService.compare(by, order, strA, strB);
     };
+  }
+
+  setSectionFilter(courseTab: CourseTab, sectionName: string): void {
+    courseTab.selectedSectionFilter = sectionName;
   }
 }
