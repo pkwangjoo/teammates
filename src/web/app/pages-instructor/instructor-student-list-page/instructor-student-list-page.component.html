@@ -59,12 +59,31 @@
                   </div>
 
                   <hr>
+                  
+                  <div class="flex-container-action">
+                    <a id="btn-enroll" class="btn btn-success"
+                        tmRouterLink="/web/instructor/courses/enroll"
+                        [queryParams]="{courseid: courseTab.course.courseId}">
+                      Enroll Students
+                    </a>
 
-                  <a id="btn-enroll" class="btn btn-success"
-                      tmRouterLink="/web/instructor/courses/enroll"
-                      [queryParams]="{courseid: courseTab.course.courseId}">
-                    Enroll Students
-                  </a>
+                    <div class="flex-container-filter">
+                      <div>Filter by</div>
+                      <div ngbDropdown>
+                        <button class="btn btn-light btn-sm custom-button-active" ngbDropdownToggle style="margin-left: 5px">Select section name</button>
+                        <div ngbDropdownMenu>
+                          <a
+                            class="btn btn-primary btn-sm dropdown-item clickable"
+                          >
+                          section
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+
                   <br><br>
                   <tm-student-list
                       [courseId]="courseTab.course.courseId"
