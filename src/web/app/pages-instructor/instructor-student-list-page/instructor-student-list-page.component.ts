@@ -28,6 +28,7 @@ export interface CourseTab {
   course: Course;
   sectionList: string[]
   selectedSectionFilter: string;
+  filteredStudentList: StudentListRowModel[];
   studentList: StudentListRowModel[];
   studentSortBy: SortBy;
   studentSortOrder: SortOrder;
@@ -85,6 +86,7 @@ export class InstructorStudentListPageComponent implements OnInit {
               const courseTab: CourseTab = {
                 course,
                 studentList: [],
+                filteredStudentList: [],
                 sectionList: [],
                 selectedSectionFilter: '',
                 studentSortBy: SortBy.NONE,
@@ -143,6 +145,7 @@ export class InstructorStudentListPageComponent implements OnInit {
             })
                 .pipe(finalize(() => {
                   courseTab.hasStudentLoaded = true;
+                  courseTab.filteredStudentList = [...courseTab.studentList];
                 }))
                 .subscribe({
                   next: (instructorPrivilege: InstructorPrivilege) => {
@@ -198,6 +201,8 @@ export class InstructorStudentListPageComponent implements OnInit {
         courseTab.studentList =
             courseTab.studentList.filter(
                 (studentModel: StudentListRowModel) => studentModel.student.email !== studentEmail);
+        
+        courseTab.filteredStudentList = [...courseTab.studentList]
 
         const students: Student[] =
             courseTab.studentList.map((studentModel: StudentListRowModel) => studentModel.student);
@@ -273,7 +278,7 @@ export class InstructorStudentListPageComponent implements OnInit {
     courseTab.studentSortBy = by;
     courseTab.studentSortOrder =
       courseTab.studentSortOrder === SortOrder.DESC ? SortOrder.ASC : SortOrder.DESC;
-    courseTab.studentList.sort(this.sortStudentBy(by, courseTab.studentSortOrder));
+    courseTab.filteredStudentList.sort(this.sortStudentBy(by, courseTab.studentSortOrder));
   }
 
   /**
@@ -326,5 +331,18 @@ export class InstructorStudentListPageComponent implements OnInit {
 
   setSectionFilter(courseTab: CourseTab, sectionName: string): void {
     courseTab.selectedSectionFilter = sectionName;
+    this.filterStudentListBySection(courseTab, sectionName);
   }
+
+  filterStudentListBySection(courseTab: CourseTab, sectionName: string) {
+    if (sectionName == '' || sectionName == 'All sections') {
+      courseTab.filteredStudentList = [...courseTab.studentList];
+      return;
+    }
+
+    courseTab.filteredStudentList = [...courseTab.studentList];
+    courseTab.filteredStudentList = courseTab.studentList.filter(
+        (studentModel: StudentListRowModel) => studentModel.student.sectionName === sectionName);
+  }
+
 }

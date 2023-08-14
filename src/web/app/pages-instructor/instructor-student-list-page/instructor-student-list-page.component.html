@@ -81,7 +81,7 @@
                           </a>
                           <a
                             class="btn btn-primary btn-sm dropdown-item clickable"
-                            (click)="setSectionFilter(courseTab, '')"
+                            (click)="setSectionFilter(courseTab, 'All sections')"
                           >
                           All sections 
                           </a>
@@ -95,7 +95,7 @@
                   <br><br>
                   <tm-student-list
                       [courseId]="courseTab.course.courseId"
-                      [students]="courseTab.studentList"
+                      [students]="courseTab.filteredStudentList"
                       [tableSortBy]="courseTab.studentSortBy"
                       [tableSortOrder]="courseTab.studentSortOrder"
                       [useGrayHeading]="false"
