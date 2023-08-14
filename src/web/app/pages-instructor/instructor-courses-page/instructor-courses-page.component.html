@@ -91,7 +91,7 @@
                 </span>
               </td>
               <td>
-                <span *ngIf="!courseStats[course.course.courseId]">
+                <span *ngIf="!courseStats[course.course.courseId]" role="button">
                   <a *ngIf="!course.isLoadingCourseStats; else loadingSpinner" (click)="getCourseStats(i)"
                     [tmRouterLink]="">
                     Show
@@ -102,7 +102,7 @@
                 </span>
               </td>
               <td>
-                <span *ngIf="!courseStats[course.course.courseId]">
+                <span *ngIf="!courseStats[course.course.courseId]" role="button">
                   <a *ngIf="!course.isLoadingCourseStats; else loadingSpinner" id="show-statistics-{{ i }}"
                     (click)="getCourseStats(i)" [tmRouterLink]="">
                     Show
@@ -113,7 +113,7 @@
                 </span>
               </td>
               <td>
-                <span *ngIf="!courseStats[course.course.courseId]">
+                <span *ngIf="!courseStats[course.course.courseId]" role="button">
                   <a *ngIf="!course.isLoadingCourseStats; else loadingSpinner" (click)="getCourseStats(i)"
                     [tmRouterLink]="">
                     Show
@@ -124,7 +124,7 @@
                 </span>
               </td>
               <td>
-                <span *ngIf="!courseStats[course.course.courseId]">
+                <span *ngIf="!courseStats[course.course.courseId]" role="button">
                   <a *ngIf="!course.isLoadingCourseStats; else loadingSpinner" (click)="getCourseStats(i)"
                     [tmRouterLink]="">
                     Show
