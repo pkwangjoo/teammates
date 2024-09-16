@@ -59,16 +59,43 @@
                   </div>
 
                   <hr>
+                  
+                  <div class="flex-container-action">
+                    <a id="btn-enroll" class="btn btn-success"
+                        tmRouterLink="/web/instructor/courses/enroll"
+                        [queryParams]="{courseid: courseTab.course.courseId}">
+                      Enroll Students
+                    </a>
 
-                  <a id="btn-enroll" class="btn btn-success"
-                      tmRouterLink="/web/instructor/courses/enroll"
-                      [queryParams]="{courseid: courseTab.course.courseId}">
-                    Enroll Students
-                  </a>
+                    <div class="flex-container-filter">
+                      <div>Filter by</div>
+                      <div ngbDropdown>
+                        <button class="btn btn-light btn-sm custom-button-active" ngbDropdownToggle style="margin-left: 5px">{{!courseTab.selectedSectionFilter? 'Select section name' : courseTab.selectedSectionFilter}}</button>
+                        <div ngbDropdownMenu>
+                          <a
+                            class="btn btn-primary btn-sm dropdown-item clickable"
+                            *ngFor="let section of courseTab.sectionList"
+                            (click)="setSectionFilter(courseTab, section)"
+                          >
+                          {{section}}
+                          </a>
+                          <a
+                            class="btn btn-primary btn-sm dropdown-item clickable"
+                            (click)="setSectionFilter(courseTab, 'All sections')"
+                          >
+                          All sections 
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+
                   <br><br>
                   <tm-student-list
                       [courseId]="courseTab.course.courseId"
-                      [students]="courseTab.studentList"
+                      [students]="courseTab.filteredStudentList"
                       [tableSortBy]="courseTab.studentSortBy"
                       [tableSortOrder]="courseTab.studentSortOrder"
                       [useGrayHeading]="false"
